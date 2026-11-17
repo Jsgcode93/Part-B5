@@ -125,6 +125,18 @@ movieRow(movie, index) {
         this.saveToStorage();
         this.refresh();
     }
+    sortRatingAndZ2A() {
+        this.movieList.sort((a, b) => {
+            // Primary sort: Rating highest to lowest
+            if (b.rating !== a.rating) {
+                return b.rating - a.rating;
+            }
+            // Secondary sort: Title Z to A 
+            return b.title.localeCompare(a.title);
+        });
+        this.saveToStorage();
+        this.refresh();
+    }
 
     search(nameString) {
         let shortList = this.movieList.filter(movie => movie.title.toLowerCase().includes(nameString.toLowerCase()));
