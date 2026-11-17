@@ -38,6 +38,7 @@ const addSubmit = document.getElementById('addSubmit');
 const updateSubmit = document.getElementById('updateSubmit');
 const deleteSubmit = document.getElementById('deleteSubmit');
 const refreshBtn = document.getElementById('refreshBtn');
+const sortRatingZ2ABtn = document.getElementById('sortRatingZ2ABtn');
 
 // Add event handlers (with safety checks)
 if (searchBtn) searchBtn.addEventListener('click', searchClick);
@@ -46,6 +47,7 @@ if (sortZ2ABtn) sortZ2ABtn.addEventListener('click', z2aClick);
 if (addSubmit) addSubmit.addEventListener('click', addClick);
 if (updateSubmit) updateSubmit.addEventListener('click', updateClick);
 if (deleteSubmit) deleteSubmit.addEventListener('click', deleteClick);
+if (sortRatingZ2ABtn) sortRatingZ2ABtn.addEventListener('click', sortRatingZ2AClick);
 
 // Refresh button event handler to reset the movie list to initial state
 if (refreshBtn) {
@@ -119,6 +121,15 @@ function a2zClick(){
  */
 function z2aClick(){
   movieList.sortZ2A();
+}
+
+/**
+ * Sort the movieList by highest-to-lowest rating, then Z to A
+ * @event Click#sortRatingZ2ABtn
+ * @function sortRatingZ2AClick
+ */
+function sortRatingZ2AClick() {
+    movieList.sortRatingAndZ2A();
 }
 
 /**
