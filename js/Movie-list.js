@@ -78,6 +78,14 @@ movieRow(movie, index) {
         this.genMovieList();
     }
 
+    reset(defaultMovies) {
+        // Clear the saved database from localStorage
+        localStorage.removeItem('movieDatabase');
+        // Reload the original default movies
+        this.movieList = this.loadFromStorage(defaultMovies);
+        this.refresh();
+    }
+
     add(title, year, rating) {
         const newId = this.movieList.length > 0 ? Math.max(...this.movieList.map(m => m.id)) + 1 : 1;
         const newMovie = new Movie(newId, title, year, rating);

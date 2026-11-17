@@ -25,20 +25,19 @@ let initialMovies = [
 /**
  * @memberof MovieList
  * @instance movieList
- * @param {string} rootId - The id of the element we want to have our movieList appear in
- * @param {Array} initialMovies - The array of movies in our movieList
  * @global
- * @description The movieList instance to keep track of our list of movies in the app
+ * @description The movieList instance to keep track of list of movies in the app
  */
 let movieList = new MovieList('list', initialMovies);
 
-// Getting all the buttons from our application
+// Get references to the buttons and form elements
 const searchBtn = document.getElementById('searchBtn');
 const sortA2ZBtn = document.getElementById('sortA2ZBtn');
 const sortZ2ABtn = document.getElementById('sortZ2ABtn');
 const addSubmit = document.getElementById('addSubmit');
 const updateSubmit = document.getElementById('updateSubmit');
 const deleteSubmit = document.getElementById('deleteSubmit');
+const refreshBtn = document.getElementById('refreshBtn');
 
 // Add event handlers (with safety checks)
 if (searchBtn) searchBtn.addEventListener('click', searchClick);
@@ -48,8 +47,22 @@ if (addSubmit) addSubmit.addEventListener('click', addClick);
 if (updateSubmit) updateSubmit.addEventListener('click', updateClick);
 if (deleteSubmit) deleteSubmit.addEventListener('click', deleteClick);
 
+// Refresh button event handler to reset the movie list to initial state
+if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
+        // Clear the search input box if text was typed
+        const searchInput = document.getElementById('search-string');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+
+        // Wipes storage changes and reverts back to the original starting movies
+        movieList.reset(initialMovies); 
+    });
+}
+
 /** 
- * Search for a movie by partial title
+ * Search for a movie by ID or Title
  * @event Click#searchBtn
  * @function searchClick
  */
@@ -141,25 +154,19 @@ function addClick() {
     }
 }
 
-
 /**
- * Get movie data from the movie list to update when typing an index in the index input in the update form
+ * Get movie data from the movie list to update when typing an index 
  * @function getData
  */
 function getData(){
   console.log("getData");
-  // Get form elements
   const idValue = document.getElementById('upIndex').value;
   const upIndex = Number(idValue);
-  console.log(upIndex);
   const upperBound = movieList.movieList.length;
-  console.log(upperBound);
   if(upIndex > 0  && upIndex <= upperBound ){
     const title = document.getElementById('upTitle');
     const year = document.getElementById('upYear');
-    // search the movieList for the row
-    const row = movieList.getRow(upIndex -1 );
-    console.log(row);
+    const row = movieList.getRow(upIndex - 1);
     title.value = row.title;
     year.value = row.year;
   } else {
@@ -168,7 +175,7 @@ function getData(){
 }
 
 const upIndex = document.getElementById('upIndex');
-upIndex.addEventListener('change', getData);
+if (upIndex) upIndex.addEventListener('change', getData);
 
 /**
  * @event Click#updateSubmit
@@ -180,7 +187,6 @@ function updateClick(){
     let title = document.getElementById("upTitle").value;
     let year = Number(document.getElementById("upYear").value);
     
-    // Use the same validation as addClick
     const pattern = /^[a-z0-9\s]*$/i;
     const test = pattern.test(title);
     const yearIsInt = Number.isInteger(year);
@@ -204,101 +210,54 @@ function updateClick(){
  * @description Delete a movie from the movieList
  */
 function deleteClick(){
-  // get the element from the dom
   let indexElement = document.getElementById("delIndex");
-  let index = Number(indexElement.value);
-  index = index - 1;
-  console.log(index);
-  // instance.property.length
+  let index = Number(indexElement.value) - 1; 
   const upperBound = movieList.movieList.length;
-  console.log(upperBound);
-  if ( index > 0 && index <= upperBound){
-    // get the current movie
+  
+  if (index >= 0 && index < upperBound){
     const movie = movieList.getRow(index);
-    // confirm the delete
     const confirm = window.confirm(`Do you want to delete movie "${movie.title}"?`);
     if(confirm){
-      console.log("Deleting movie....", movie.title);
-      // Delete movie from movieList
-      movieList.delete(Number(index));
+      movieList.delete(index);
       showMessage("Movie Deleted", "chartreuse", "black");
     } else {
-      console.log("Delete cancelled");
       showMessage("Delete cancelled", "DarkOrange", "white");
     }
   } else {
     showMessage("No such index exists", "DarkOrange", "white");
   }
 }
+
 // UI Javascript
-/**
- * JavaScript function for opening the forms
- * @function openForm
- * @param {object} evt - the event object.
- * @param {string} action - The name of the action being used.
- */
 function openForm(evt, action){
-  // declare variables
   let i, tabContent, tabLinks;
-  // Get All elements that have the classname of tabcontent
   tabContent = document.getElementsByClassName('tabcontent');
-  for( i =0; i < tabContent.length; i++){
-    // set the display to none for all elements with this class name
+  for(i = 0; i < tabContent.length; i++){
     tabContent[i].style.display = 'none';
   }
-  // get all elements that have the classname of tablinks
   tabLinks = document.getElementsByClassName('tablinks');
   for(i = 0; i < tabLinks.length; i++){
-    // change the classlist to remove the active class
     tabLinks[i].className = tabLinks[i].className.replace("active", "");
   }
-  // Show the current tab and add the active class to the button that opened the tab
   document.getElementById(action).style.display = "block";
-  evt.currentTarget.className += " active"
+  evt.currentTarget.className += " active";
 }
-// End of openForm()
 
-// Open a tab by default(
-document.getElementById('defaultOpen').click();
+const defaultOpen = document.getElementById('defaultOpen');
+if (defaultOpen) defaultOpen.click();
 
-/**
- * Get the current data and inject it into the footer
- */
 const dateSpan = document.getElementById("date");
-// get the date
-const theDate = new Date();
-// Add the date into the DOM
-dateSpan.textContent = theDate.getFullYear();
+if (dateSpan) {
+    const theDate = new Date();
+    dateSpan.textContent = theDate.getFullYear();
+}
 
-/**
- * @function showMessage
- * @param {string} message - the message to display
- * @param {string} colour - the colour of the message box background
- * @param {string} text - the colour of the text in the message box
- */
 function showMessage(message, colour, text){
   const msg = document.getElementById('msg');
-  msg.style.display = "block";
-  msg.textContent = message;
-  msg.style.backgroundColor = colour;
-  msg.style.color = text;
+  if (msg) {
+      msg.style.display = "block";
+      msg.textContent = message;
+      msg.style.backgroundColor = colour;
+      msg.style.color = text;
+  }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const manager = new MovieManager();
-    const listContainer = document.getElementById("list");
-
-    function renderList() {
-        listContainer.innerHTML = "";
-        manager.movies.forEach(movie => {
-            const li = document.createElement("li");
-            li.className = "list-group-item d-flex justify-content-between align-items-center mb-2 shadow-sm";
-            li.innerHTML = `
-                <span><strong>ID ${movie.id}:</strong> ${movie.title} (${movie.year}) - Rating: ${movie.rating}</span>
-            `;
-            listContainer.appendChild(li);
-        });
-    }
-
-    renderList();
-});

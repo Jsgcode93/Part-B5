@@ -12,7 +12,6 @@ This file displays our list of movies on the main page
 ## AddDelete.html
 This file holds our forms to add, update, and delete movies with an ID, title, year, and rating
 
-
 ## style.css
 This file holds all our CSS styling for this app.
 
