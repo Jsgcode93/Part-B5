@@ -8,19 +8,19 @@
 /* Body Style */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #212529;
+  background-color: #fcfbf9;
+  color: #292524;
 }
-/*Test*/
+
 /* Heading Styles */
 h1 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  color: #1e3d59;
+  color: #78350f;
   background-color: #ffffff;
   padding: 1.2rem 0;
   text-align: center;
-  border: 3px solid #1e3d59;
+  border: 3px solid #78350f;
   border-radius: 6px;
   font-size: 2.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -28,7 +28,7 @@ h1 {
 
 h2 {
   margin-bottom: 0.5rem;
-  color: #1e3d59;
+  color: #78350f;
 }
 
 /* Utility Styles */
@@ -49,26 +49,27 @@ input {
   padding: 0.5rem 1rem;
 }
 
-/* Base Buttons -  */
+/* Base Buttons */
 button {
   font-size: 18px;
-  border: 2px solid #0f172a;
+  border: 2px solid #292524;
   cursor: pointer;
   padding: 0.8rem 1.2rem;
-  background-color: #0f172a;
+  background-color: #292524;
   color: #ffffff;
   border-radius: 4px;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 button:hover {
-  background-color: #334155;
-  border-color: #0ea5e9;
+  background-color: #44403c;
+  border-color: #d97706;
   color: #ffffff;
 }
+
 /* Search sort style */
 .search-sort {
-  border: 2px solid #cbd5e1;
+  border: 2px solid #d7d3cb;
   background-color: #ffffff;
   padding: 1rem;
   border-radius: 6px;
@@ -80,9 +81,10 @@ button:hover {
 .search-sort form {
   margin-left: 1.5rem;
 }
+
 /* Movie list styles */
 #mList {
-  border: 3px solid #1e3d59;
+  border: 3px solid #78350f;
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 6px;
@@ -91,7 +93,7 @@ button:hover {
 
 ol {
   margin-left: 1.5rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #d7d3cb;
   margin-bottom: 1.5rem;
   margin-right: 1.5rem;
   border-radius: 4px;
@@ -105,23 +107,23 @@ ol {
 .list .row {
   padding: 10px 15px;
   cursor: pointer;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e7e5e4;
 }
 
 .list .row:nth-child(odd) {
-  background-color: #f8fafc;
+  background-color: #f5f4f0;
 }
- 
+  
 .list .row:hover {
-  background-color: #e0f2fe;
-  color: #0f172a;
+  background-color: #fef3c7;
+  color: #292524;
 }
 
 /* Tab section styles */
 .tab {
   margin-top: 1rem;
   overflow: hidden;
-  border: 1px solid #cbd5e1;
+  border: 1px solid #d7d3cb;
   border-radius: 6px;
   background-color: #ffffff;
 }
@@ -132,27 +134,28 @@ ol {
   padding: 1rem 1.2rem;
   transition: 0.2s;
   background-color: transparent;
-  color: #475569;
+  color: #57534e;
   font-weight: 600;
   border-radius: 0;
 }
 .tab button:hover {
-  background-color: #f1f5f9;
-  color: #0f172a;
+  background-color: #f5f4f0;
+  color: #292524;
   border: none;
 }
 .tab button.active {
-  background-color: #1e3d59;
+  background-color: #78350f;
   color: #ffffff;
   border: none;
 }
+
 /* Footer styles */
 footer {
   margin-top: 2rem;
-  border: 2px solid #1e3d59;
+  border: 2px solid #78350f;
   background-color: #ffffff;
   text-align: right;
-  color: #1e3d59;
+  color: #78350f;
   padding: 1.5rem;
   font-size: 1.2rem;
   border-radius: 6px;
