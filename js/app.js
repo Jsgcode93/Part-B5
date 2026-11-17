@@ -54,9 +54,40 @@ if (deleteSubmit) deleteSubmit.addEventListener('click', deleteClick);
  * @function searchClick
  */
 function searchClick(){
-  let formElements = document.getElementById("form-list-control").elements;
-  let text = formElements["search-string"].value;
-  movieList.search(text);
+    let formElements = document.getElementById("form-list-control").elements;
+    let query = formElements["search-string"].value.trim().toLowerCase();
+    
+    // If search box is empty, display all movies
+    if (!query) {
+        movieList.display();
+        return;
+    }
+
+    // Filter movies matching either ID or Title
+    const filteredMovies = movieList.movieList.filter(movie => {
+        const matchesId = String(movie.id).toLowerCase().includes(query);
+        const matchesTitle = movie.title.toLowerCase().includes(query);
+        return matchesId || matchesTitle;
+    });
+
+    // Render filtered results to the list container
+    const listContainer = document.getElementById(movieList.rootId);
+    if (listContainer) {
+        listContainer.innerHTML = "";
+        if (filteredMovies.length === 0) {
+            listContainer.innerHTML = `<li class="row text-muted p-3">No movies found matching your search.</li>`;
+        } else {
+            filteredMovies.forEach(movie => {
+                const row = document.createElement('div');
+                row.className = 'row d-flex justify-content-between align-items-center p-2 border-bottom';
+                row.innerHTML = `
+                    <div><strong>ID:</strong> ${movie.id} | <strong>Title:</strong> ${movie.title} (${movie.year})</div>
+                    <div><span class="badge bg-secondary">Rating: ${movie.rating}</span></div>
+                `;
+                listContainer.appendChild(row);
+            });
+        }
+    }
 }
 
 /**
