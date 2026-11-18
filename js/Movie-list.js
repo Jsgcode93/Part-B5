@@ -4,7 +4,9 @@
  * @author Jeremy Geddes
  */
 
+// Movie class to represent individual movie objects
 class Movie {
+    // Constructor function to initialize movie properties: id, title, year, and rating
     constructor(id, title, year, rating) {
         this.id = id;
         this.title = title;
@@ -13,6 +15,7 @@ class Movie {
     }
 }
 
+// MovieList class 
 class MovieList {
     constructor(rootId, defaultMovies = []) {
         this.rootId = rootId;
@@ -20,7 +23,8 @@ class MovieList {
         this.refresh();
     }
 
-loadFromStorage(defaultMovies) {
+    // LoadFromStorage function to retrieve saved movies from localStorage 
+    loadFromStorage(defaultMovies) {
         const stored = localStorage.getItem('movieDatabase');
         if (stored && stored !== "undefined" && stored !== "null") {
             try {
@@ -39,18 +43,20 @@ loadFromStorage(defaultMovies) {
         return initial;
     }
 
+    // SaveToStorage function 
     saveToStorage() {
         localStorage.setItem('movieDatabase', JSON.stringify(this.movieList));
     }
 
-movieRow(movie, index) {
+    // MovieRow function
+    movieRow(movie, index) {
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) return;
         
         const row = document.createElement('li');
         row.classList.add('row', 'list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'mb-2', 'shadow-sm');
         
-        // Simple, clean text display for title, year, and rating
+        // Title, Year and rating 
         row.innerHTML = `
             <span><strong>#${index + 1}:</strong> ${movie.title} (${movie.year}) - Rating: ${movie.rating}</span>
         `;
@@ -58,12 +64,14 @@ movieRow(movie, index) {
         rootElement.appendChild(row);
     }
 
+    // GenMovieList function to loop through all movies in the list and generate their rows
     genMovieList() {
         for (let i = 0; i < this.movieList.length; i++) {
             this.movieRow(this.movieList[i], i);
         }
     }
 
+    // RemoveElements function to clear all existing movie row elements 
     removeElements() {
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) return;
@@ -73,19 +81,21 @@ movieRow(movie, index) {
         }
     }
 
+    // Refresh function to clear the DOM elements and re-render the current movie list
     refresh() {
         this.removeElements();
         this.genMovieList();
     }
 
+    // Reset function to clear localStorage & restore default movies
     reset(defaultMovies) {
-        // Clear the saved database from localStorage
         localStorage.removeItem('movieDatabase');
-        // Reload the original default movies
+
         this.movieList = this.loadFromStorage(defaultMovies);
         this.refresh();
     }
 
+    // Add function to create a new movie with a unique ID, push it to the list, save, and refresh
     add(title, year, rating) {
         const newId = this.movieList.length > 0 ? Math.max(...this.movieList.map(m => m.id)) + 1 : 1;
         const newMovie = new Movie(newId, title, year, rating);
@@ -94,6 +104,7 @@ movieRow(movie, index) {
         this.refresh();
     }
 
+    // Update function to modify an existing movie's properties
     update(index, title, year, rating) {
         if (this.movieList[index]) {
             this.movieList[index].title = title;
@@ -104,27 +115,33 @@ movieRow(movie, index) {
         }
     }
 
+    // Delete function to remove a movie from the list 
     delete(index) {
         this.movieList.splice(index, 1);
         this.saveToStorage();
         this.refresh();
     }
 
+    // GetRow function to retrieve a specific movie object by its array index
     getRow(index) {
         return this.movieList[index];
     }
 
+    // SortA2Z function to sort the movie list(A to Z)
     sortA2Z() {
         this.movieList.sort((a, b) => a.title.localeCompare(b.title));
         this.saveToStorage();
         this.refresh();
     }
 
+    // SortZ2A function to sort the movie list  (Z to A)
     sortZ2A() {
         this.movieList.sort((a, b) => b.title.localeCompare(a.title));
         this.saveToStorage();
         this.refresh();
     }
+
+    // SortRatingAndZ2A function to sort movies primarily by highest rating, then secondary by title (Z to A)
     sortRatingAndZ2A() {
         this.movieList.sort((a, b) => {
             // Primary sort: Rating highest to lowest
@@ -138,6 +155,7 @@ movieRow(movie, index) {
         this.refresh();
     }
 
+    // Search function
     search(nameString) {
         let shortList = this.movieList.filter(movie => movie.title.toLowerCase().includes(nameString.toLowerCase()));
         this.removeElements();
