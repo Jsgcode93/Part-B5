@@ -122,34 +122,55 @@ ol {
   color: #7c2d12;
 }
 
-/* Tab section styles */
-.tab {
-  margin-top: 1rem;
-  overflow: hidden;
-  border: 2px solid #818cf8;
-  border-radius: 6px;
+/* Form & Tab Card Color */
+.tabcontent.card {
   background-color: #e0e7ff;
-}
-.tab button {
-  float: left;
-  border: none;
-  outline: none;
-  padding: 1rem 1.2rem;
-  transition: 0.2s;
-  background-color: transparent;
-  color: #312e81;
-  font-weight: 600;
-  border-radius: 0;
-}
-.tab button:hover {
-  background-color: #c7d2fe;
+  border: 2px solid #6366f1;
   color: #1e1b4b;
-  border: none;
 }
-.tab button.active {
+
+.tabcontent.card h3,
+.tabcontent.card label {
+  color: #1e1b4b;
+  font-weight: 600;
+}
+
+.tabcontent.card .form-control {
+  background-color: #f5f3ff;
+  color: #1e1b4b;
+  border: 1px solid #818cf8;
+}
+
+.tabcontent.card .form-control:focus {
+  background-color: #ffffff;
+  color: #1e1b4b;
+  border-color: #ea580c;
+  box-shadow: 0 0 0 0.2rem rgba(234, 88, 12, 0.25);
+}
+
+/* Table Section Color */
+#mList {
+  border: 3px solid #3730a3;
+  background-color: #e0e7ff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+#mList .table {
+  --bs-table-bg: #f5f3ff;
+  --bs-table-striped-bg: #e0e7ff;
+  --bs-table-hover-bg: #fed7aa;
+  --bs-table-color: #1e1b4b;
+  --bs-table-hover-color: #7c2d12;
+  color: #1e1b4b;
+  border-color: #818cf8;
+}
+
+#mList .table thead.table-dark th {
   background-color: #3730a3;
   color: #ffffff;
-  border: none;
+  border-color: #1e1b4b;
 }
 /* Footer styles */
 footer {
