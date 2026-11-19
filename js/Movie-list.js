@@ -97,7 +97,7 @@ class MovieList {
         this.refresh();
     }
 
-    // Add function to create a new movie with a unique ID, push it to the list, save, and refresh
+    // Add function to create a new movie 
     add(title, year, rating) {
         const newId = this.movieList.length > 0 ? Math.max(...this.movieList.map(m => m.id)) + 1 : 1;
         const newMovie = new Movie(newId, title, year, rating);

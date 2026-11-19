@@ -30,39 +30,38 @@ let initialMovies = [
  */
 let movieList = new MovieList('list', initialMovies);
 
-// Get references to the buttons and form elements
+// Getting all the buttons from our application
 const searchBtn = document.getElementById('searchBtn');
 const sortA2ZBtn = document.getElementById('sortA2ZBtn');
 const sortZ2ABtn = document.getElementById('sortZ2ABtn');
+const sortRatingZ2ABtn = document.getElementById('sortRatingZ2ABtn');
 const addSubmit = document.getElementById('addSubmit');
 const updateSubmit = document.getElementById('updateSubmit');
 const deleteSubmit = document.getElementById('deleteSubmit');
-const refreshBtn = document.getElementById('refreshBtn');
-const sortRatingZ2ABtn = document.getElementById('sortRatingZ2ABtn');
 
-// Event handlers 
+// Refresh button 
+const refreshBtns = document.querySelectorAll('.refresh-btn');
+
+// Add event handlers (with safety checks)
 if (searchBtn) searchBtn.addEventListener('click', searchClick);
 if (sortA2ZBtn) sortA2ZBtn.addEventListener('click', a2zClick);
 if (sortZ2ABtn) sortZ2ABtn.addEventListener('click', z2aClick);
+if (sortRatingZ2ABtn) sortRatingZ2ABtn.addEventListener('click', sortRatingZ2AClick);
 if (addSubmit) addSubmit.addEventListener('click', addClick);
 if (updateSubmit) updateSubmit.addEventListener('click', updateClick);
 if (deleteSubmit) deleteSubmit.addEventListener('click', deleteClick);
-if (sortRatingZ2ABtn) sortRatingZ2ABtn.addEventListener('click', sortRatingZ2AClick);
 
-// Refresh button event handler 
-if (refreshBtn) {
-    refreshBtn.addEventListener('click', () => {
-        // Clear the search input box if text was typed
+//  .refresh-btn elements 
+refreshBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
         const searchInput = document.getElementById('search-string');
         if (searchInput) {
             searchInput.value = '';
         }
 
-        // Wipes storage changes and reverts back to the original starting movies
-        movieList.reset(initialMovies); 
+        movieList.reset(initialMovies);
     });
-}
-
+});
 /** 
  * Search for a movie by ID or Title
  * @event Click#searchBtn

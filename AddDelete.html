@@ -13,8 +13,9 @@
 <main class="container my-4"> 
     <!-- Page Header -->   
     <h1 class="mb-4">&#127916; Movie DB &#127909;</h1>
-<!--Movie List table-->
-   <section id="mList" class="mb-4">
+
+    <!-- Movie List table -->
+    <section id="mList" class="mb-4">
         <h2>All Movies</h2>
         <div class="table-responsive">
             <table class="table table-striped table-hover align-middle">
@@ -27,7 +28,10 @@
                         <th scope="col">Rating</th>
                     </tr>
                 </thead>
-                <tbody id="list">
+                <tbody id="list"></tbody>
+            </table>
+        </div>
+    </section>
 
     <!-- Tabs --> 
     <section class="tab mb-4">
@@ -53,60 +57,60 @@
                 <input type="number" step="0.1" class="form-control" placeholder="Rating..." name="rating" id="addRating" required>
             </div>
             <button type="button" class="btn btn-success" id="addSubmit">Add Movie</button>
-            <button type="button" class="btn btn-secondary" id="refreshBtn">Refresh List</button>
+            <button type="button" class="btn btn-secondary refresh-btn">Refresh List</button>
         </form>
     </section>
     
-<!-- Update Movie Section -->
-        <section id="Update" class="tabcontent card p-4 mb-4 shadow-sm" style="display: none;">
-            <h3 class="h4 mb-3">Update a Movie</h3>
-            <form id="form-update">
-                <div class="mb-3">
-                    <label for="upIndex" class="form-label">Movie Index / ID</label>
-                    <input type="number" class="form-control" placeholder="Index..." name="index" id="upIndex" required>
-                </div>
-                <div class="mb-3">
-                    <label for="upTitle" class="form-label">New Title</label>
-                    <input type="text" class="form-control" placeholder="New title..." name="title" id="upTitle" required>
-                </div>
-                <div class="mb-3">
-                    <label for="upYear" class="form-label">New Year</label>
-                    <input type="number" class="form-control" placeholder="New year..." name="year" id="upYear" required>
-                </div>
-                <button type="button" class="btn btn-warning" id="updateSubmit">Update Movie</button>
-                <button type="button" class="btn btn-secondary" id="refreshBtn">Refresh List</button>
-            </form>
-        </section>
+    <!-- Update Movie Section -->
+    <section id="Update" class="tabcontent card p-4 mb-4 shadow-sm" style="display: none;">
+        <h3 class="h4 mb-3">Update a Movie</h3>
+        <form id="form-update">
+            <div class="mb-3">
+                <label for="upIndex" class="form-label">Movie Index / ID</label>
+                <input type="number" class="form-control" placeholder="Index..." name="index" id="upIndex" required>
+            </div>
+            <div class="mb-3">
+                <label for="upTitle" class="form-label">New Title</label>
+                <input type="text" class="form-control" placeholder="New title..." name="title" id="upTitle" required>
+            </div>
+            <div class="mb-3">
+                <label for="upYear" class="form-label">New Year</label>
+                <input type="number" class="form-control" placeholder="New year..." name="year" id="upYear" required>
+            </div>
+            <button type="button" class="btn btn-warning" id="updateSubmit">Update Movie</button>
+            <button type="button" class="btn btn-secondary refresh-btn">Refresh List</button>
+        </form>
+    </section>
 
-<!--Delete movie-->
-<section id="Delete" class="tabcontent card p-4 mb-4 shadow-sm" style="display: none;">    
-            <h3 class="h4 mb-3">Delete a Movie</h3>
-            <form id="form-delete">
-                <div class="mb-3">
-                    <label for="delIndex" class="form-label">Movie Index / ID</label>
-                    <input type="number" class="form-control" placeholder="Index to delete..." name="index" id="delIndex" required>
-                </div>
-                <button type="button" class="btn btn-danger" id="deleteSubmit">Delete Movie</button>
-                <button type="button" class="btn btn-secondary" id="refreshBtn">Refresh List</button>
-            </form>
-        </section>
-    </main>  
-<!-- End delete movie -->
+    <!-- Delete movie -->
+    <section id="Delete" class="tabcontent card p-4 mb-4 shadow-sm" style="display: none;">    
+        <h3 class="h4 mb-3">Delete a Movie</h3>
+        <form id="form-delete">
+            <div class="mb-3">
+                <label for="delIndex" class="form-label">Movie Index / ID</label>
+                <input type="number" class="form-control" placeholder="Index to delete..." name="index" id="delIndex" required>
+            </div>
+            <button type="button" class="btn btn-danger" id="deleteSubmit">Delete Movie</button>
+            <button type="button" class="btn btn-secondary refresh-btn">Refresh List</button>
+        </form>
+    </section>
+</main>  
 
- <!-- JavaScript Files -->
-    <script src="./js/Movie-list.js"></script>
-    <script src="./js/app.js"></script>
+<!-- JavaScript Files -->
+<script src="./js/Movie-list.js"></script>
+<script src="./js/app.js"></script>
 
-  <!--Navbar Script-->
-    <script> 
-        fetch('Navbar.html')
-            .then(response => response.text()) 
-            .then(html => { 
-                document.getElementById('navbar-placeholder').innerHTML = html;  
-            })
-            .catch(error => console.error('Navbar unable to load!', error));
-    </script>
-<!--Bootstrap Script-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>   
+<!-- Navbar Script -->
+<script> 
+    fetch('Navbar.html')
+        .then(response => response.text()) 
+        .then(html => { 
+            document.getElementById('navbar-placeholder').innerHTML = html;  
+        })
+        .catch(error => console.error('Navbar unable to load!', error));
+</script>
+
+<!-- Bootstrap Script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>   
 </body>
 </html>
