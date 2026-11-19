@@ -40,7 +40,7 @@ const deleteSubmit = document.getElementById('deleteSubmit');
 const refreshBtn = document.getElementById('refreshBtn');
 const sortRatingZ2ABtn = document.getElementById('sortRatingZ2ABtn');
 
-// Add event handlers (with safety checks)
+// Event handlers 
 if (searchBtn) searchBtn.addEventListener('click', searchClick);
 if (sortA2ZBtn) sortA2ZBtn.addEventListener('click', a2zClick);
 if (sortZ2ABtn) sortZ2ABtn.addEventListener('click', z2aClick);
@@ -49,7 +49,7 @@ if (updateSubmit) updateSubmit.addEventListener('click', updateClick);
 if (deleteSubmit) deleteSubmit.addEventListener('click', deleteClick);
 if (sortRatingZ2ABtn) sortRatingZ2ABtn.addEventListener('click', sortRatingZ2AClick);
 
-// Refresh button event handler to reset the movie list to initial state
+// Refresh button event handler 
 if (refreshBtn) {
     refreshBtn.addEventListener('click', () => {
         // Clear the search input box if text was typed

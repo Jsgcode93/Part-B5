@@ -48,19 +48,21 @@ class MovieList {
         localStorage.setItem('movieDatabase', JSON.stringify(this.movieList));
     }
 
-    // MovieRow function
+// MovieRow function 
     movieRow(movie, index) {
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) return;
-        
-        const row = document.createElement('li');
-        row.classList.add('row', 'list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'mb-2', 'shadow-sm');
-        
-        // Title, Year and rating 
+
+        const row = document.createElement('tr');
+        row.classList.add('movie-row');
+
         row.innerHTML = `
-            <span><strong>#${index + 1}:</strong> ${movie.title} (${movie.year}) - Rating: ${movie.rating}</span>
+            <th scope="row">${index + 1}</th>
+            <td>${movie.title}</td>
+            <td>${movie.year}</td>
+            <td>${movie.rating}</td>
         `;
-        
+
         rootElement.appendChild(row);
     }
 
@@ -71,11 +73,11 @@ class MovieList {
         }
     }
 
-    // RemoveElements function to clear all existing movie row elements 
+// RemoveElements function 
     removeElements() {
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) return;
-        const childNodes = rootElement.getElementsByClassName('row');
+        const childNodes = rootElement.getElementsByClassName('movie-row');
         while (childNodes.length > 0) {
             rootElement.removeChild(childNodes[0]);
         }
