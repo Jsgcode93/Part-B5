@@ -13,12 +13,21 @@
 <main class="container my-4"> 
     <!-- Page Header -->   
     <h1 class="mb-4">&#127916; Movie DB &#127909;</h1>
-
-    <!-- Live Movie List -->
-    <section id="mList" class="mb-4">                            
-        <h2 class="h4 mb-3">Movie List</h2>
-        <ol class="list" id="list"></ol>  
-    </section>
+<!--Movie List table-->
+   <section id="mList" class="mb-4">
+        <h2>All Movies</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Rating</th>
+                    </tr>
+                </thead>
+                <tbody id="list">
 
     <!-- Tabs --> 
     <section class="tab mb-4">
