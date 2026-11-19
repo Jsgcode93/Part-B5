@@ -1,7 +1,7 @@
 /**
- * @file Movie-list.js
- * @description Movie and MovieList classes with localStorage and Rating support.
- * @author Jeremy Geddes
+- @file Movie-list.js
+- @description Movie and MovieList classes with localStorage and Rating support.
+- @author Jeremy Geddes
  */
 
 // Movie class to represent individual movie objects
@@ -38,7 +38,7 @@ class MovieList {
         }
         
         // Generate initial default movies with IDs and ratings
-        const initial = defaultMovies.map((m, index) => new Movie(index + 1, m.title, m.year, m.rating || 5.0));
+        const initial = defaultMovies.map((m, index) => new Movie(index + 1, m.title, m.year, m.rating ?? 5.0));
         localStorage.setItem('movieDatabase', JSON.stringify(initial));
         return initial;
     }
@@ -48,7 +48,20 @@ class MovieList {
         localStorage.setItem('movieDatabase', JSON.stringify(this.movieList));
     }
 
-// MovieRow function 
+    // Convert a 0-10 rating into a 5-star visual display
+    formatStars(rating) {
+        const numericRating = Number(rating);
+        if (Number.isNaN(numericRating)) return '☆☆☆☆☆';
+
+        const scaled = Math.max(0, Math.min(5, numericRating / 2));
+        const fullStars = Math.floor(scaled);
+        const hasHalfStar = scaled - fullStars >= 0.5 ? 1 : 0;
+        const emptyStars = 5 - fullStars - hasHalfStar;
+
+        return '★'.repeat(fullStars) + (hasHalfStar ? '⯨' : '') + '☆'.repeat(emptyStars);
+    }
+
+    // MovieRow function 
     movieRow(movie, index) {
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) return;
@@ -56,11 +69,16 @@ class MovieList {
         const row = document.createElement('tr');
         row.classList.add('movie-row');
 
+        const stars = this.formatStars(movie.rating);
+
         row.innerHTML = `
             <th scope="row">${index + 1}</th>
             <td>${movie.title}</td>
             <td>${movie.year}</td>
-            <td>${movie.rating}</td>
+            <td>
+                <span class="star-rating" aria-label="${movie.rating} out of 10">${stars}</span>
+                <span class="rating-value">(${movie.rating}/10)</span>
+            </td>
         `;
 
         rootElement.appendChild(row);
@@ -73,7 +91,7 @@ class MovieList {
         }
     }
 
-// RemoveElements function 
+    // RemoveElements function 
     removeElements() {
         const rootElement = document.getElementById(this.rootId);
         if (!rootElement) return;
@@ -119,9 +137,11 @@ class MovieList {
 
     // Delete function to remove a movie from the list 
     delete(index) {
-        this.movieList.splice(index, 1);
-        this.saveToStorage();
-        this.refresh();
+        if (index >= 0 && index < this.movieList.length) {
+            this.movieList.splice(index, 1);
+            this.saveToStorage();
+            this.refresh();
+        }
     }
 
     // GetRow function to retrieve a specific movie object by its array index
@@ -159,7 +179,11 @@ class MovieList {
 
     // Search function
     search(nameString) {
-        let shortList = this.movieList.filter(movie => movie.title.toLowerCase().includes(nameString.toLowerCase()));
+        const query = nameString.trim().toLowerCase();
+        const shortList = this.movieList.filter(movie =>
+            movie.title.toLowerCase().includes(query) ||
+            String(movie.id) === query
+        );
         this.removeElements();
         shortList.forEach((movie, index) => this.movieRow(movie, index));
     }
