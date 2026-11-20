@@ -25,7 +25,35 @@ h1 {
   font-size: 2.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
+/* Cinema Image Behavior */
+.cinema-header-wrap {
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border: 3px solid #1e1b4b;
+}
 
+/* dark glaze over the photo so white text visible */
+.cinema-header-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 27, 75, 0.35);
+  pointer-events: none;
+}
+
+.cinema-header-title {
+  z-index: 1;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
 h2 {
   margin-bottom: 0.5rem;
   color: #3730a3;
@@ -49,7 +77,7 @@ input {
   padding: 0.5rem 1rem;
 }
 
-/* Base Buttons -  */
+/* Base Buttons */
 button {
   font-size: 18px;
   border: 2px solid #9a3412;
@@ -92,7 +120,7 @@ button:hover {
 ol {
   margin-left: 1.5rem;
   border: 2px solid #818cf8;
-  background-color: #ffffff;
+  background-color: #675eb7;
   margin-bottom: 1.5rem;
   margin-right: 1.5rem;
   border-radius: 4px;
@@ -177,48 +205,56 @@ footer p {
   border-radius: 4px;
   display: none;
 }
-/* Navbar Styles */
-nav,
-.navbar,
-#navbar-placeholder nav {
-  background-color: #3730a3;
-  border-bottom: 3px solid #1e1b4b;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+/* Form Cards & Search/Sort Containers */
+.tabcontent,
+.tabcontent.card,
+.search-sort {
+  background-color: #e0e7ff;
+  border: 2px solid #818cf8;
+  border-radius: 6px;
+  padding: 1.5rem;
+  color: #1e1b4b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
-nav .navbar-brand,
-nav .nav-link,
-nav a,
-.navbar a,
-#navbar-placeholder a {
-  color: #ffffff;
+/* Form Labels */
+.tabcontent label,
+.search-sort label {
   font-weight: 600;
-  text-decoration: none;
-  padding: 0.5rem 0.85rem;
+  color: #1e1b4b;
+  margin-bottom: 0.35rem;
+}
+
+/* Text Inputs, Number Inputs & Select Dropdowns */
+input[type="text"],
+input[type="number"],
+input[type="search"],
+select,
+.form-control,
+.form-select {
+  background-color: #ffffff;
+  color: #1e1b4b;
+  border: 2px solid #818cf8;
   border-radius: 4px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  padding: 0.55rem 0.85rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-nav .navbar-brand:hover,
-nav .nav-link:hover,
-nav a:hover,
-.navbar a:hover,
-#navbar-placeholder a:hover {
-  background-color: #fed7aa;
-  color: #7c2d12;
+/* Form outline highlight when hovered*/
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+select:focus,
+.form-control:focus,
+.form-select:focus {
+  border-color: #ea580c;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(234, 88, 12, 0.25);
 }
 
-nav .nav-link.active,
-nav a.active,
-.navbar a.active,
-#navbar-placeholder a.active {
-  background-color: #ea580c;
-  color: #ffffff;
-}
-
-nav .navbar-toggler,
-.navbar .navbar-toggler {
-  border-color: #c7d2fe;
-  color: #ffffff;
+/* Placeholder Text */
+input::placeholder,
+.form-control::placeholder {
+  color: #6366f1;
+  opacity: 0.75;
 }
